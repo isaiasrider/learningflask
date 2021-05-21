@@ -1,8 +1,6 @@
 from flask import Flask
+from s3_interaction import list_buckets
 
-import s3_interaction
-from s3_interaction import list_buckets, lista
-import boto3
 app = Flask(__name__)
 
 @app.route("/")
@@ -15,8 +13,7 @@ def list_endpoints():
 
 @app.route("/list")
 def list_todos_buckets():
-    resposta = lista()
-    print(resposta)
-    return "resposta"
+    resposta = list_buckets()
+    return {'data': resposta['Buckets']}
 
 
