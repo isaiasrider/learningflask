@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import sys
 import boto3
-import jsonify
 
 BUCKET_NAME = 'guerysbucket'
 

@@ -16,4 +16,8 @@ def list_todos_buckets():
     resposta = list_buckets()
     return {'Seus Buckets': resposta['Buckets']}
 
+@app.route("/healthy")
+def healthy():
+    return {"Healthy": "1"}
+
 
