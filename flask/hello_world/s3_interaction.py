@@ -22,4 +22,3 @@ def delete_object(file_name,bucket):
     s3_resources.Object(bucket,file_name).delete()
 
 
-

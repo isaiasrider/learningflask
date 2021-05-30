@@ -14,6 +14,6 @@ def list_endpoints():
 @app.route("/list")
 def list_todos_buckets():
     resposta = list_buckets()
-    return {'data': resposta['Buckets']}
+    return {'Seus Buckets': resposta['Buckets']}
 
 
