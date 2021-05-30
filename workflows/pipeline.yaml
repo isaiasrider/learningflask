@@ -1,0 +1,7 @@
+name: ms-s3-interaction
+on: [push]
+jobs:
+  checkout-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
