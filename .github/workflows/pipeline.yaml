@@ -13,7 +13,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       -
         name: Build S3 Interaction Image
-        run: ls -l
+        run: docker build -t s3_interaction:${GITHUB_SHA::8} -f ../Dockerfile .
 
       -
         name: Show Docker Image
