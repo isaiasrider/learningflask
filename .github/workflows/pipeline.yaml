@@ -14,7 +14,7 @@ jobs:
       -
         name: Build S3 Interaction Image
         id: docker_build
-        run: docker run -i s3_interaction:${GITHUB_SHA::8}
+        run: docker build -t s3_interaction:${GITHUB_SHA::8}
 
       -
         name: Show Docker Image
