@@ -20,5 +20,5 @@ jobs:
            tags: isaias/app:latest
       -
         name: Show Docker Image
-        run : echo ${{ step.docker_build.outputs.digest }}
+        run : echo ${{ steps.docker_build.outputs.digest }}
 
