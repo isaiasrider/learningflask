@@ -20,5 +20,5 @@ jobs:
            tag_with_ref: true
       -
         name: Show Docker Image
-        run : echo ${{ steps.docker_build.outputs.digest }}
+        run : docker images
 
