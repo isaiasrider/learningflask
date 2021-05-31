@@ -18,3 +18,7 @@ jobs:
         with:
            push: false
            tags: isaias/app:latest
+      -
+        name: Show Docker Image
+        run : echo ${{ step.docker_build.outputs.digest }}
+
