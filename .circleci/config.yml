@@ -23,7 +23,9 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
   Test: # This is our second job.
     docker: # it uses the docker executor
       - image: docker:19.03.15 # specifically, a docker image with ruby 2.4.1
-
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKERHUB_PASSWORD
     # Steps are a list of commands to run inside the docker container above.
     steps:
       - checkout # this pulls code down from GitHub
@@ -33,7 +35,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
       - run:
           name:
           command: |
-            docker run -d --name my-app isaias:$CIRCLE_SHA1
+            docker run -d --name my-app isaiasonthecloud/isaias:$CIRCLE_SHA1
             docker exec my-app curl --retry 10 --retry-connrefused http://localhost:5000/healthy
       - run: echo "Test Executado com Sucesso" # a command telling the job to "sleep" for 25 seconds.
 workflows:
@@ -41,4 +43,4 @@ workflows:
   Build and Test: # this is the name of our workflow
     jobs: # and here we list the jobs we are going to run.
       - Build
-#      - Test
+      - Test
