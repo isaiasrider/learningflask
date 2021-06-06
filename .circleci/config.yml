@@ -4,7 +4,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
     docker: # it uses the docker executor
       - image: docker:19.03.15 # specifically, a docker image with ruby 2.4.1
         auth:
-          username: $dockeruser
+          username: $DOCKER_USER
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     # Steps are a list of commands to run inside the docker container above.
     steps:
@@ -16,6 +16,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
           name:
           command: |
             docker build -t isaias:$CIRCLE_SHA1 .
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
             docker push isaias:$CIRCLE_SHA1
       - run: echo "Build Executado com Sucesso" # a command telling the job to "sleep" for 25 seconds.
   Test: # This is our second job.
