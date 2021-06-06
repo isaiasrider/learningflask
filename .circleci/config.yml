@@ -2,7 +2,7 @@ version: 2
 jobs: # we now have TWO jobs, so that a workflow can coordinate them!
   Build: # This is our first job.
     docker: # it uses the docker executor
-      - image: ubuntu:20.04 # specifically, a docker image with ruby 2.4.1
+      - image: python:3.8.10-alpine3.13 # specifically, a docker image with ruby 2.4.1
 #        auth:
 #          username: mydockerhub-user
 #          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
