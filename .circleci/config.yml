@@ -19,7 +19,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
 #          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: echo "A more familiar hi" # We run a similar echo command to above.
+      - run: docker build -t isaias:$CIRCLE_SHA1 . # We run a similar echo command to above.
       - run: sleep 15 # and then sleep for 15 seconds.
 # Under the workflows: map, we can coordinate our two jobs, defined above.
 workflows:
