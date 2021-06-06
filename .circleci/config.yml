@@ -17,6 +17,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
           command: |
             docker build -t isaias:$CIRCLE_SHA1 .
             docker login -u $DOCKER_USER -p $DOCKERHUB_PASSWORD
+            docker tag isaias:$CIRCLE_SHA1 isaias:$CIRCLE_SHA1
             docker push isaias:$CIRCLE_SHA1
       - run: echo "Build Executado com Sucesso" # a command telling the job to "sleep" for 25 seconds.
   Test: # This is our second job.
