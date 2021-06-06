@@ -12,6 +12,7 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
       - setup_remote_docker:
           version: 19.03.8
           docker_layer_caching: false
+      - run: apk add docker-cli
       - run: docker build -t isaias:$CIRCLE_SHA1 . # This prints "A first hello" to stdout.
       - run: echo "Build Executado com Sucesso" # a command telling the job to "sleep" for 25 seconds.
   Test: # This is our second job.
