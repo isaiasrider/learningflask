@@ -18,15 +18,23 @@ jobs: # we now have TWO jobs, so that a workflow can coordinate them!
             docker build -t isaias:$CIRCLE_SHA1 .
       - run: echo "Build Executado com Sucesso" # a command telling the job to "sleep" for 25 seconds.
   Test: # This is our second job.
-    docker: # it runs inside a docker image, the same as above.
-      - image: ubuntu:20.04
-#        auth:
-#          username: mydockerhub-user
-#          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    docker: # it uses the docker executor
+      - image: docker:19.03.15 # specifically, a docker image with ruby 2.4.1
+    #        auth:
+    #          username: mydockerhub-user
+    #          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # Steps are a list of commands to run inside the docker container above.
     steps:
-      - checkout
-      - run: sleep 15 # and then sleep for 15 seconds.
-# Under the workflows: map, we can coordinate our two jobs, defined above.
+      - checkout # this pulls code down from GitHub
+      - setup_remote_docker:
+          version: 19.03.8
+          docker_layer_caching: false
+      - run:
+          name:
+          command: |
+            docker run -d --name my-app isaias:$CIRCLE_SHA1
+            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:5000/healthy
+      - run: echo "Test Executado com Sucesso" # a command telling the job to "sleep" for 25 seconds.
 workflows:
   version: 2
   Build and Test: # this is the name of our workflow
