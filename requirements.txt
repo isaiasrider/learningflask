@@ -1,0 +1,5 @@
+awscli==1.19.29
+boto3
+botocore
+Flask==1.1.2
+future==0.18.2
