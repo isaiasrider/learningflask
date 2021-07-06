@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-s3interaction
+  labels:
+    app: ms-s3interaction
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-s3interaction
+  template:
+    metadata:
+      labels:
+        app: ms-s3interaction
+    spec:
+      containers:
+        - name: ms-s3interaction
+          image: isaiasonthecloud/ms-s3interaction:latest
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-s3interaction-service
+spec:
+  selector:
+    app: ms-s3interaction
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 49160
+
