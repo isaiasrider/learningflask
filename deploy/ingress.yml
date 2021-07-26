@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ms-s3interaction-ingress
+spec:
+  rules:
+  - host: ms-s3interaction.teste1234.com
+    http:
+      paths:
+      - backend:
+          serviceName: ms-s3interaction-service
+          servicePort: 5000
